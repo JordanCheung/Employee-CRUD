@@ -1,0 +1,43 @@
+body {
+	min-width: 580px;
+}
+
+label {
+	clear: left;
+	text-align: left;
+}
+
+input {
+	width: 100%;
+}
+
+input, label {
+	float: left;
+	margin: 2px 0px;
+}
+
+.sub-menu {
+	border-style: groove;
+	width: 100%;
+}
+
+#submit {
+	clear: left;
+	width: 120px;
+	float: right;
+	margin: 4px 0px;
+}
+
+.table-footer {
+	padding: 5px;
+	border-collapse: separate;
+	border-spacing: 5px;
+}
+
+.header-form {
+	display: none;
+}
+
+.header-label {
+	text-decoration: none;
+}

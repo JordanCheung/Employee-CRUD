@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+
+<definitions xmlns:xs="http://www.bcit.ca/comp4656/employee/services"
+			 xmlns:tns="http://www.bcit.ca/comp4656/employee/types"
+			 xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+			 xmlns:soap="http://schemas.xmlsoap.org/wsdl/types/"
+			 xmlns:ns="http://schemas.xmlsoap.org/soap/encoding/"
+			 xmlns="http://schemas.xmlsoap.org/wsdl/" 
+			 name="employeeService"
+		 	 targetNamespace="http://www.bcit.ca/comp4656/employee/services">
+		
+	<types>
+    	<xsd:schema>
+    		<xsd:import namespace="http://www.bcit.ca/comp4656/employee/types" schemaLocation="employee.xsd"/>
+    	</xsd:schema>
+	</types>
+	
+	<message name="numberOfEmployees">
+		<part name="numberOfEmployeesReq" element="tns:numberOfEmployeesRequest"/>
+	</message>
+	
+	<message name="numberOfEmployeesResult">
+		<part name="numberOfEmployeesRes" element="tns:numberOfEmployeesResponse"/>
+	</message>
+	
+	<message name="employeeList">
+		<part name="employeeListReq" element="tns:employeeListRequest"/>
+	</message>
+	
+	<message name="employeeListResult">
+		<part name="employeeListRes" element="tns:employeeListResponse"/>
+	</message>
+	
+	<message name="addEmployee">
+		<part name="addEmployeeReq" element="tns:addEmployeeRequest"/>
+	</message>
+	
+	<message name="addEmployeeResult">
+		<part name="addEmployeeRes" element="tns:addEmployeeResponse"/>
+	</message>
+	
+	<message name="deleteEmployee">
+		<part name="deleteEmployeeReq" element="tns:deleteEmployeeRequest"/>
+	</message>
+	
+	<message name="deleteEmployeeResult">
+		<part name="deleteEmployeeRes" element="tns:deleteEmployeeResponse"/>
+	</message>
+	
+	<message name="findEmployee">
+		<part name="findEmployeeReq" element="tns:findEmployeeRequest"/>
+	</message>
+	
+	<message name="findEmployeeResult">
+		<part name="findEmployeeRes" element="tns:findEmployeeResponse"/>
+	</message>
+	
+	<portType name="EmployeeServicePort">
+		<operation name="numberOfEmployeesOperation">
+			<input message="xs:numberOfEmployees"/>
+			<output message="xs:numberOfEmployeesResult"/>
+		</operation>
+		<operation name="employeeListOperation">
+			<input message="xs:employeeList"/>
+			<output message="xs:employeeListResult"/>
+		</operation>
+		<operation name="addEmployeeOperation">
+			<input message="xs:addEmployee"/>
+			<output message="xs:addEmployeeResult"/>
+		</operation>
+		<operation name="deleteEmployeeOperation">
+			<input message="xs:deleteEmployee"/>
+			<output message="xs:deleteEmployeeResult"/>
+		</operation>
+		<operation name="findEmployeeOperation">
+			<input message="xs:findEmployee"/>
+			<output message="xs:findEmployeeResult"/>
+		</operation>
+	</portType>
+	
+	<binding name="EmployeeServicePortBinding" type="xs:EmployeeServicePort">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<operation name="numberOfEmployeesOperation">
+			<soap:operation soapAction="http://www.bcit.ca/comp4656/employee/getNumberOfEmployees"/>
+      		<output>
+        		<soap:body use="literal"/>
+      		</output>
+		</operation>
+		<operation name="employeeListOperation">
+			<soap:operation soapAction="http://www.bcit.ca/comp4656/employee/employeeList"/>
+      		<output>
+        		<soap:body use="literal"/>
+      		</output>
+		</operation>
+		<operation name="addEmployeeOperation">
+			<soap:operation soapAction="http://www.bcit.ca/comp4656/employee/addEmployee"/>
+			<input>
+        		<soap:body use="literal"/>
+      		</input>
+      		<output>
+        		<soap:body use="literal"/>
+      		</output>
+		</operation>
+		<operation name="deleteEmployeeOperation">
+			<soap:operation soapAction="http://www.bcit.ca/comp4656/employee/deleteEmployee"/>
+			<input>
+        		<soap:body use="literal"/>
+      		</input>
+      		<output>
+        		<soap:body use="literal"/>
+      		</output>
+		</operation>
+		<operation name="findEmployeeOperation">
+			<soap:operation soapAction="http://www.bcit.ca/comp4656/employee/findEmployee"/>
+			<input>
+        		<soap:body use="literal"/>
+      		</input>
+      		<output>
+        		<soap:body use="literal"/>
+      		</output>
+		</operation>
+	</binding>
+	
+	<service name="EmployeeService">
+		<port name="EmployeeServicePort" binding="xs:EmployeeServicePortBinding">
+			<soap:address location="http://localhost:8080/employeeServices"/>
+		</port>
+	</service>
+		 
+</definitions>

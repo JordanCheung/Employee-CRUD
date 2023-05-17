@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.bcit.ca/comp4656/employee/types"
+		xmlns:tns="http://www.bcit.ca/comp4656/employee/types"
+		xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		version="1.0">
+	
+	<xsd:element name="numberOfEmployeesRequest" type="tns:void"/>
+	
+	<xsd:element name="numberOfEmployeesResponse">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="numberOfEmployees" type="tns:posInt"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	
+	<xsd:element name="employeeListRequest" type="tns:void"/>
+	
+	<xsd:element name="employeeListResponse">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="listOfEmployees" type="tns:employee" minOccurs="0" maxOccurs="unbounded"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	
+	<xsd:element name="addEmployeeRequest">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="id" type="tns:id"/>
+				<xsd:element name="firstName" type="tns:firstName"/>
+				<xsd:element name="lastName" type="tns:lastName"/>
+				<xsd:element name="dob" type="tns:dob"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	
+	<xsd:element name="addEmployeeResponse">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="addResponseCode" type="tns:responseCode"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	
+	<xsd:element name="deleteEmployeeRequest">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="id" type="tns:id"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	
+	<xsd:element name="deleteEmployeeResponse">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="deleteResponseCode" type="tns:responseCode"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	
+	<xsd:element name="findEmployeeRequest">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="id" type="tns:id"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	
+	<xsd:element name="findEmployeeResponse">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="findResult" type="tns:employee"/>
+				<xsd:element name="findResponseCode" type="tns:responseCode"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	
+	<xsd:complexType name="employee">
+		<xsd:sequence>
+			<xsd:element name="id" type="tns:id"/>
+			<xsd:element name="firstName" type="tns:firstName"/>
+			<xsd:element name="lastName" type="tns:lastName"/>
+			<xsd:element name="dob" type="tns:dob"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:simpleType name="id">
+		<xsd:restriction base="xsd:string">
+			<xsd:pattern value="^[A][0][0-9]{7}$"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	
+	<xsd:simpleType name="firstName">
+		<xsd:restriction base="xsd:string">
+			<xsd:minLength value="1"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	
+	<xsd:simpleType name="lastName">
+		<xsd:restriction base="xsd:string">
+			<xsd:minLength value="1"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	
+	<xsd:simpleType name="dob">
+		<xsd:union memberTypes="xsd:date tns:emptyString"/>
+	</xsd:simpleType>
+	<xsd:simpleType name="emptyString">
+		<xsd:restriction base="xsd:string">
+			<xsd:length value="0"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	
+	<xsd:complexType name="responseCode">
+		<xsd:sequence>
+			<xsd:element name="code" type="xsd:string"/>
+			<xsd:element name="description" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:simpleType name="posInt">
+		<xsd:restriction base="xsd:int">
+			<xsd:minInclusive value="0" />
+		</xsd:restriction>
+	</xsd:simpleType>
+	
+	<xsd:complexType name="void">
+		<xsd:sequence>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+</xsd:schema>
